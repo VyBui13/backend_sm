@@ -1,0 +1,90 @@
+﻿CREATE PROCEDURE SP_INS_PUBLIC_NHANVIEN
+    @MANV VARCHAR(20),
+    @HOTEN NVARCHAR(100),
+    @EMAIL VARCHAR(20),
+    @LUONGCB INT,
+    @TENDN NVARCHAR(100),
+    @MK NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @HASHED_MK VARBINARY(MAX);
+    DECLARE @ENCRYPTED_LUONG VARBINARY(MAX);
+    DECLARE @ASYMKEY_NAME NVARCHAR(100);
+
+    -- Tạo giá trị mật khẩu được HASH bằng SHA1
+    SET @HASHED_MK = HASHBYTES('SHA1', CONVERT(VARBINARY(MAX), @MK));
+
+    -- Tên khóa bất đối xứng (asymmetric key) là mã nhân viên
+    SET @ASYMKEY_NAME = @MANV;
+
+    -- Kiểm tra và tạo khóa bất đối xứng nếu chưa tồn tại
+    IF NOT EXISTS (
+        SELECT * FROM sys.asymmetric_keys WHERE name = @ASYMKEY_NAME
+    )
+    BEGIN
+        EXEC ('CREATE ASYMMETRIC KEY ' + @ASYMKEY_NAME + ' 
+               WITH ALGORITHM = RSA_2048 
+               ENCRYPTION BY PASSWORD = ''' + @MK + '''');
+    END
+
+    SET @ENCRYPTED_LUONG = EncryptByAsymKey(
+        AsymKey_ID(@ASYMKEY_NAME), 
+        CAST(@LUONGCB AS VARCHAR)
+    );
+
+    -- Thêm dữ liệu vào bảng NHANVIEN
+    INSERT INTO NHANVIEN (MANV, HOTEN, EMAIL, LUONG, TENDN, MATKHAU, PUBKEY)
+    VALUES (@MANV, @HOTEN, @EMAIL, @ENCRYPTED_LUONG, @TENDN, @HASHED_MK, @MANV);
+END;
+
+GO
+
+CREATE PROCEDURE SP_SEL_PUBLIC_NHANVIEN
+    @TENDN NVARCHAR(100),
+    @MK NVARCHAR(100)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @MANV VARCHAR(20);
+    DECLARE @LUONG_ENCRYPTED VARBINARY(MAX);
+    DECLARE @LUONGCB VARCHAR(100);
+    DECLARE @ASYMKEY_NAME NVARCHAR(100);
+
+    -- Lấy MANV và LUONG đã mã hóa
+    SELECT 
+        @MANV = MANV,
+        @LUONG_ENCRYPTED = LUONG
+    FROM NHANVIEN
+    WHERE TENDN = @TENDN;
+
+    SET @ASYMKEY_NAME = @MANV;
+
+    SET @LUONGCB = CONVERT(VARCHAR, 
+		DecryptByAsymKey(
+			AsymKey_ID(@ASYMKEY_NAME), 
+			@LUONG_ENCRYPTED,
+			@MK
+		)
+	);
+
+    -- Trả kết quả
+    SELECT 
+        MANV,
+        HOTEN,
+        EMAIL,
+        @LUONGCB AS LUONGCB
+    FROM NHANVIEN
+    WHERE TENDN = @TENDN;
+END;
+
+--go
+
+--EXEC SP_INS_PUBLIC_NHANVIEN 'NV01', 'NGUYEN VAN A', 'NVA@', 3000000, 'NVA', 'abcd12'
+
+--delete from NHANVIEN where MANV = 'NV01'
+
+-- select * from nhanvien
+-- EXEC SP_SEL_PUBLIC_NHANVIEN 'NVA', 'abcd12'
