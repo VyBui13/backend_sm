@@ -1,19 +1,18 @@
 server:
   port: 8080
-  servlet:
-    context-path: /student
 
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433
-    username: sa            
-    password: your_password     
+    url: jdbc:sqlserver://localhost:1433;databaseName=QLSVNhom;encrypt=true;trustServerCertificate=true;characterEncoding=UTF-8
+    username: sa
+    password: abcd
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
+    database-platform: org.hibernate.dialect.SQLServerDialect
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
@@ -22,4 +21,3 @@ spring:
     config:
       import-check:
         enabled: false
-

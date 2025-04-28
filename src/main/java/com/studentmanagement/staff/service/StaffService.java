@@ -5,6 +5,8 @@ import java.util.List;
 import com.studentmanagement.staff.dto.StaffDto;
 
 public interface StaffService {
+    public StaffDto getStaffInfoByCredentials(String username, String password);
+
     public List<StaffDto> getAllStaffs();
     public StaffDto getStaff(String id);
     public StaffDto createStaff(StaffDto staffDto);

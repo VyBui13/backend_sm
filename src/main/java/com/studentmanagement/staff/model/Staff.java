@@ -1,10 +1,11 @@
 package com.studentmanagement.staff.model;
 
-import org.springframework.data.annotation.Id;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
 
 @Entity
+@Data
 public class Staff {
     @Id
     private String id;
@@ -13,7 +14,7 @@ public class Staff {
     private String email;
     private Long salary;
     private String username;
-    private String password;
+    private byte[] password;
     private String pubkey;
     
     public String getId() {
@@ -56,11 +57,11 @@ public class Staff {
         this.username = username;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 

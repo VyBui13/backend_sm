@@ -1,5 +1,7 @@
 package com.studentmanagement.staff.repository;
 
-public class StaffRepository {
-    
+import com.studentmanagement.staff.model.Staff;
+
+public interface StaffRepository {
+    Staff getStaffInfoByCredentials(String username, String password);
 }
