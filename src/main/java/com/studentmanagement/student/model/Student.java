@@ -1,6 +1,6 @@
 package com.studentmanagement.student.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -13,7 +13,10 @@ public class Student {
     private String id;
 
     private String fullname;
-    private LocalDateTime dob;
+
+    private Timestamp dob;
+    
     private String address;
+    
     private String classId;
 }
