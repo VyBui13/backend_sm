@@ -4,12 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.lang.NonNull;
 
 import com.studentmanagement.staff.model.Staff;
 
 public class StaffRowMapper implements RowMapper<Staff> {
     @Override
-    public Staff mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Staff mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
         Staff staff = new Staff();
 
         staff.setId(rs.getString("MANV"));

@@ -2,6 +2,8 @@
 
 - [x] Lấy danh sách sinh viên (có kèm param để lấy sinh viên do nhân viên quản lý)
   - [x] Làm stored procedure: SP_SEL_ALL_PUBLIC_SINHVIEN, SP_SEL_PUBLIC_SINHVIEN_BY_NHANVIEN
+- [ ] Thay đổi thông tin sinh viên
+  - [x] Làm stored procedure: SP_UPDATE_SINHVIEN
 - [ ] Lấy danh sách học phần theo mã sinh viên
   - [x] Làm stored procedure: SP_GET_ALL_HOCPHAN_BY_SINHVIEN
 - [ ] Lấy danh sách lớp
