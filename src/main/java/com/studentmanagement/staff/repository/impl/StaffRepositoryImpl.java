@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import com.studentmanagement.staff.mapper.SignInRowMapper;
 import com.studentmanagement.staff.mapper.StaffRowMapper;
 import com.studentmanagement.staff.model.Staff;
 import com.studentmanagement.staff.repository.StaffRepository;
@@ -21,10 +22,19 @@ public class StaffRepositoryImpl implements StaffRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    private SimpleJdbcCall signInStaff;
     private SimpleJdbcCall getStaffInfoProc;
 
     @PostConstruct
     private void init() {
+        signInStaff = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("SP_SIGN_IN_NHANVIEN")
+                .declareParameters(
+                    new SqlParameter("TENDN", Types.NVARCHAR),
+                    new SqlParameter("MK", Types.NVARCHAR)
+                )
+                .returningResultSet("result", new SignInRowMapper());
+        
         getStaffInfoProc = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("SP_SEL_PUBLIC_NHANVIEN")
                 .declareParameters(
@@ -32,6 +42,27 @@ public class StaffRepositoryImpl implements StaffRepository {
                     new SqlParameter("MK", Types.NVARCHAR)
                 )
                 .returningResultSet("result", new StaffRowMapper());
+    }
+
+    @Override
+    public Boolean signIn(String username, String password) {
+        Map<String, Object> inParams = Map.of(
+            "TENDN", username,
+            "MK", password
+        );
+
+        Map<String, Object> out = signInStaff.execute(inParams);
+
+        Object resultObj = out.get("result");
+
+        if (resultObj instanceof List<?> resultList 
+            && !resultList.isEmpty() 
+            && resultList.get(0) instanceof Boolean result) {
+            
+            return result;
+        }
+
+        return null;
     }
 
     @Override

@@ -23,11 +23,13 @@ public class StaffController {
 
     @PostMapping("/sign-in")
     public ResponseEntity<ApiResponse<StaffDto>> signInStaff(@RequestBody StaffSignInDto staffSignInDto) {
-        StaffDto foundStaff = staffService.getStaffInfoByCredentials(staffSignInDto.getUsername(), staffSignInDto.getPassword());
+        Boolean isAuthorized = staffService.signIn(staffSignInDto.getUsername(), staffSignInDto.getPassword());
 
-        if (foundStaff == null) {
+        if (!isAuthorized) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse<>("failed", "Signed in unsuccessfully", null));
         }
+        
+        StaffDto foundStaff = staffService.getStaffInfoByCredentials(staffSignInDto.getUsername(), staffSignInDto.getPassword());
 
         return ResponseEntity.ok(new ApiResponse<>("success", "Signed in successfully", foundStaff));
     }

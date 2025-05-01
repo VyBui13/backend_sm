@@ -578,7 +578,12 @@ BEGIN
     -- Kiểm tra bản ghi điểm tồn tại
     IF NOT EXISTS (SELECT 1 FROM BANGDIEM WHERE MASV = @MASV AND MAHP = @MAHP)
     BEGIN
-        RAISERROR('Không tồn tại điểm cho sinh viên %s và học phần %s.', 16, 1, @MASV, @MAHP);
+        EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
+            @MASV,
+            @MAHP,
+            @DIEMTHI,
+            @MANV,
+            @PUBKEY
         RETURN;
     END
     

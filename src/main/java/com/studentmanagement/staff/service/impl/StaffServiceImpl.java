@@ -18,6 +18,13 @@ public class StaffServiceImpl implements StaffService {
     StaffRepository staffRepository;
     
     @Override
+    public Boolean signIn(String username, String password) {
+        Boolean isAuthorized = staffRepository.signIn(username, password);
+
+        return isAuthorized;
+    }
+
+    @Override
     public StaffDto getStaffInfoByCredentials(String username, String password) {
         Staff foundStaff = staffRepository.getStaffInfoByCredentials(username, password);
 
