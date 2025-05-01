@@ -26,7 +26,15 @@ public class StaffController {
         Boolean isAuthorized = staffService.signIn(staffSignInDto.getUsername(), staffSignInDto.getPassword());
 
         if (!isAuthorized) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse<>("failed", "Signed in unsuccessfully", null));
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(
+                        new ApiResponse<>(
+                            "failed", 
+                            "Signed in unsuccessfully", 
+                            null
+                        )
+                    );
         }
         
         StaffDto foundStaff = staffService.getStaffInfoByCredentials(staffSignInDto.getUsername(), staffSignInDto.getPassword());

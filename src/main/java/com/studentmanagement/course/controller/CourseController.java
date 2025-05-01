@@ -3,6 +3,7 @@ package com.studentmanagement.course.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ import com.studentmanagement.course.model.CourseDto;
 import com.studentmanagement.course.model.UpdateCourseGradeDto;
 import com.studentmanagement.course.service.CourseService;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 @RestController
 @RequestMapping("/courses")
@@ -28,15 +29,35 @@ public class CourseController {
         @RequestParam(required = true, name = "studentId") String studentId,
         @RequestParam(required = true, name = "password") String password
     ) {
-        List<CourseDto> courses = courseService.getCourseByStudentId(studentId, password);
+        try {
+            List<CourseDto> courses = courseService.getCourseByStudentId(studentId, password);
+            
+            return ResponseEntity.ok(
+                new ApiResponse<List<CourseDto>>(
+                    "success",
+                    "Courses retrieved successfully",
+                    courses
+                )
+            );
+        } catch (Exception e) {
+            if (e.getCause() instanceof SQLServerException) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                    new ApiResponse<List<CourseDto>>(
+                        "failed",
+                        "Unmatched credentials",
+                        null
+                    )
+                );
+            }
 
-        return ResponseEntity.ok(
-            new ApiResponse<List<CourseDto>>(
-                "success",
-                "Courses retrieved successfully",
-                courses
-            )
-        );
+            return ResponseEntity.internalServerError().body(
+                new ApiResponse<List<CourseDto>>(
+                    "failed",
+                    "Internal server error",
+                    null
+                )
+            );
+        }
     }
 
     @PatchMapping()
@@ -47,14 +68,34 @@ public class CourseController {
         ) String studentId,
         @RequestBody UpdateCourseGradeDto updateCourseGradeDto
     ) {
-        List<CourseDto> courses = courseService.updateCourseGradeByStudentId(studentId, updateCourseGradeDto);
+        try {
+            List<CourseDto> courses = courseService.updateCourseGradeByStudentId(studentId, updateCourseGradeDto);
+            
+            return ResponseEntity.ok(
+                new ApiResponse<List<CourseDto>>(
+                    "success",
+                    "Courses grade updated successfully",
+                    courses
+                )
+            );
+        } catch(Exception e) {
+            if (e.getCause() instanceof SQLServerException) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                    new ApiResponse<List<CourseDto>>(
+                        "failed",
+                        "Unmatched credentials",
+                        null
+                    )
+                );
+            }
 
-        return ResponseEntity.ok(
-            new ApiResponse<List<CourseDto>>(
-                "success",
-                "Courses grade updated successfully",
-                courses
-            )
-        );
+            return ResponseEntity.internalServerError().body(
+                new ApiResponse<List<CourseDto>>(
+                    "failed",
+                    "Internal server error",
+                    null
+                )
+            );
+        }
     }
 }
