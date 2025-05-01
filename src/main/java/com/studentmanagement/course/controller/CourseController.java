@@ -41,6 +41,7 @@ public class CourseController {
             );
         } catch (Exception e) {
             if (e.getCause() instanceof SQLServerException) {
+
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
                     new ApiResponse<List<CourseDto>>(
                         "failed",
@@ -80,10 +81,14 @@ public class CourseController {
             );
         } catch(Exception e) {
             if (e.getCause() instanceof SQLServerException) {
+                SQLServerException sqlEx = (SQLServerException) e.getCause();
+                // Lấy thông tin lỗi từ RAISERROR
+                String errorMessage = sqlEx.getMessage();
+
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
                     new ApiResponse<List<CourseDto>>(
                         "failed",
-                        "Unmatched credentials",
+                        errorMessage,
                         null
                     )
                 );

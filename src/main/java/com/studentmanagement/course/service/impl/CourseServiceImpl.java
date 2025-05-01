@@ -28,21 +28,21 @@ public class CourseServiceImpl implements CourseService{
         UpdateCourseGradeDto updateCourseGradeDto
     ) {
         final String staffId = updateCourseGradeDto.getStaffId();
-        final String pubKey = updateCourseGradeDto.getPubKey();
         final String password = updateCourseGradeDto.getPassword();
 
-        updateCourseGradeDto
-            .getUpdateCourseGradeData()
-            .forEach((courseId, grade) -> {
-                courseRepository.updateCourseGradeByStudentId(
-                    studentId,
-                    courseId,
-                    grade,
-                    staffId,
-                    pubKey,
-                    password
-                );
-            });
+        if (!updateCourseGradeDto.getUpdateCourseGradeData().isEmpty()) {
+            updateCourseGradeDto
+                .getUpdateCourseGradeData()
+                .forEach((courseId, grade) -> {
+                    courseRepository.updateCourseGradeByStudentId(
+                        studentId,
+                        courseId,
+                        grade,
+                        staffId,
+                        password
+                    );
+                });
+        }
 
         return getCourseByStudentId(studentId, password);
     }

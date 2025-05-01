@@ -288,7 +288,7 @@ BEGIN
         L.MALOP,
         L.TENLOP,
         L.MANV,
-        N.HOTEN AS TenNhanVien
+        N.HOTEN
     FROM LOP L
     LEFT JOIN NHANVIEN N ON L.MANV = N.MANV
     ORDER BY L.MALOP;
@@ -448,8 +448,7 @@ CREATE PROCEDURE SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN
     @MASV VARCHAR(20),
     @MAHP VARCHAR(20),
     @DIEMTHI FLOAT,
-    @MANV VARCHAR(20),
-    @PUBKEY VARCHAR(20)
+    @MANV VARCHAR(20)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -468,13 +467,9 @@ BEGIN
         RETURN;
     END
     
-    -- Kiểm tra nhân viên tồn tại và PUBKEY khớp
-    IF NOT EXISTS (SELECT 1 FROM NHANVIEN WHERE MANV = @MANV AND PUBKEY = @PUBKEY)
-    BEGIN
-        RAISERROR('Nhân viên hoặc PUBKEY không hợp lệ.', 16, 1);
-        RETURN;
-    END
-    
+    DECLARE @PUBKEY VARCHAR(20)
+	SELECT @PUBKEY = PUBKEY FROM NHANVIEN WHERE MANV = @MANV
+
     -- Kiểm tra MANV có quyền nhập điểm (nhân viên quản lý lớp của sinh viên)
     IF NOT EXISTS (
         SELECT 1 
@@ -529,8 +524,7 @@ CREATE PROCEDURE SP_UPDATE_DIEM_BY_SINHVIEN_AND_HOCPHAN
     @MASV VARCHAR(20),
     @MAHP VARCHAR(20),
     @DIEMTHI FLOAT,
-    @MANV VARCHAR(20),
-    @PUBKEY VARCHAR(20)
+    @MANV VARCHAR(20)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -549,12 +543,8 @@ BEGIN
         RETURN;
     END
     
-    -- Kiểm tra nhân viên tồn tại và PUBKEY khớp
-    IF NOT EXISTS (SELECT 1 FROM NHANVIEN WHERE MANV = @MANV AND PUBKEY = @PUBKEY)
-    BEGIN
-        RAISERROR('Nhân viên hoặc PUBKEY không hợp lệ.', 16, 1);
-        RETURN;
-    END
+	DECLARE @PUBKEY VARCHAR(20)
+	SELECT @PUBKEY = PUBKEY FROM NHANVIEN WHERE MANV = @MANV
     
     -- Kiểm tra MANV có quyền cập nhật điểm (nhân viên quản lý lớp của sinh viên)
     IF NOT EXISTS (
@@ -582,8 +572,7 @@ BEGIN
             @MASV,
             @MAHP,
             @DIEMTHI,
-            @MANV,
-            @PUBKEY
+            @MANV
         RETURN;
     END
     

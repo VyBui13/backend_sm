@@ -41,8 +41,7 @@ public class CourseRepositoryImpl implements CourseRepository {
                     new SqlParameter("MASV", Types.VARCHAR),
                     new SqlParameter("MAHP", Types.VARCHAR),
                     new SqlParameter("DIEMTHI", Types.FLOAT),
-                    new SqlParameter("MANV", Types.VARCHAR),
-                    new SqlParameter("PUBKEY", Types.VARCHAR)
+                    new SqlParameter("MANV", Types.VARCHAR)
                 )
                 .returningResultSet("result", new CourseDtoRowMapper());
     }
@@ -75,7 +74,6 @@ public class CourseRepositoryImpl implements CourseRepository {
         String courseId,
         Float grade,
         String staffId,
-        String pubKey,
         String password
     ) {
         MapSqlParameterSource inParams = new MapSqlParameterSource()
@@ -83,7 +81,6 @@ public class CourseRepositoryImpl implements CourseRepository {
                     .addValue("MAHP", courseId)
                     .addValue("DIEMTHI", grade)
                     .addValue("MANV", staffId)
-                    .addValue("PUBKEY", pubKey)
                     .addValue("MK", password);
 
         Map<String, Object> out = updateCourseGradeByStudentId.execute(inParams);

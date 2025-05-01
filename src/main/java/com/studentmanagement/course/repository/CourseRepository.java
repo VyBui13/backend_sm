@@ -11,7 +11,6 @@ public interface CourseRepository {
         String courseId,
         Float grade,
         String staffId,
-        String pubKey,
         String password
     );
 }
