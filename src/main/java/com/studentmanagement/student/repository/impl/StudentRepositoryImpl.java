@@ -48,9 +48,8 @@ public class StudentRepositoryImpl implements StudentRepository {
                     new SqlParameter("HOTEN", Types.NVARCHAR),
                     new SqlParameter("NGAYSINH", Types.TIMESTAMP), // !
                     new SqlParameter("DIACHI", Types.NVARCHAR),
-                    new SqlParameter("MALOP", Types.VARCHAR),
                     new SqlParameter("MANV", Types.VARCHAR),
-                    new SqlParameter("PUBKEY", Types.VARCHAR)
+                    new SqlParameter("MK", Types.NVARCHAR)
                 )
                 .returningResultSet("result", new StudentRowMapper());
     }
@@ -100,9 +99,8 @@ public class StudentRepositoryImpl implements StudentRepository {
                     .addValue("HOTEN", updateStudentDto.getFullname())
                     .addValue("NGAYSINH", updateStudentDto.getDob(), Types.TIMESTAMP) // Có thể null
                     .addValue("DIACHI", updateStudentDto.getAddress(), Types.NVARCHAR) // Có thể null
-                    .addValue("MALOP", updateStudentDto.getClassId(), Types.NVARCHAR) // Có thể null
                     .addValue("MANV", updateStudentDto.getStaffId())
-                    .addValue("PUBKEY", updateStudentDto.getPubKey());
+                    .addValue("MK", updateStudentDto.getPassword());
 
         Map<String, Object> out = updateStudent.execute(inParams);
 

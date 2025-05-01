@@ -74,12 +74,11 @@ GO
 -- Cập nhật thông tin sinh viên theo mã sinh viên
 CREATE PROCEDURE SP_UPDATE_SINHVIEN
     @MASV VARCHAR(20),
-    @HOTEN NVARCHAR(100),
+    @HOTEN NVARCHAR(100) = NULL,
     @NGAYSINH DATETIME = NULL,
     @DIACHI NVARCHAR(200) = NULL,
-    @MALOP VARCHAR(20) = NULL,
     @MANV VARCHAR(20),
-    @PUBKEY VARCHAR(20)
+    @MK NVARCHAR(100)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -91,46 +90,33 @@ BEGIN
         RETURN;
     END
     
-    -- Kiểm tra nhân viên tồn tại và PUBKEY khớp
-    IF NOT EXISTS (SELECT 1 FROM NHANVIEN WHERE MANV = @MANV AND PUBKEY = @PUBKEY)
-    BEGIN
-        RAISERROR('Nhân viên hoặc PUBKEY không hợp lệ.', 16, 1);
-        RETURN;
-    END
+	DECLARE @HASHED_MK VARBINARY(MAX)
+	SET @HASHED_MK = HASHBYTES('SHA1', CONVERT(VARBINARY(MAX), @MK));
     
-    -- Kiểm tra MANV khớp với MANV của lớp mà sinh viên thuộc về
-    IF @MALOP IS NOT NULL
+	-- Lấy MALOP hiện tại của sinh viên
+    DECLARE @MALOP VARCHAR(20);
+    SELECT @MALOP = MALOP FROM SINHVIEN WHERE MASV = @MASV;
+    
+	IF NOT EXISTS (SELECT 1 FROM NHANVIEN WHERE MANV = @MANV AND MATKHAU = @HASHED_MK)
+	BEGIN
+		RAISERROR('Mật khẩu không khớp', 16, 1, @MALOP);
+        RETURN;
+	END
+    
+    IF NOT EXISTS (SELECT 1 FROM LOP WHERE MALOP = @MALOP AND MANV = @MANV)
     BEGIN
-        IF NOT EXISTS (SELECT 1 FROM LOP WHERE MALOP = @MALOP AND MANV = @MANV)
-        BEGIN
-            RAISERROR('Nhân viên không quản lý lớp %s.', 16, 1, @MALOP);
-            RETURN;
-        END
-    END
-    ELSE
-    BEGIN
-        -- Lấy MALOP hiện tại của sinh viên
-        DECLARE @CurrentMALOP VARCHAR(20);
-        SELECT @CurrentMALOP = MALOP FROM SINHVIEN WHERE MASV = @MASV;
-        
-        IF NOT EXISTS (SELECT 1 FROM LOP WHERE MALOP = @CurrentMALOP AND MANV = @MANV)
-        BEGIN
-            RAISERROR('Nhân viên không quản lý lớp hiện tại của sinh viên.', 16, 1);
-            RETURN;
-        END
+        RAISERROR('Nhân viên không quản lý lớp hiện tại của sinh viên.', 16, 1);
+        RETURN;
     END
     
     -- Cập nhật thông tin sinh viên
     UPDATE SINHVIEN
     SET 
-        HOTEN = @HOTEN,
+        HOTEN = ISNULL(@HOTEN, HOTEN),
         NGAYSINH = ISNULL(@NGAYSINH, NGAYSINH),
         DIACHI = ISNULL(@DIACHI, DIACHI),
         MALOP = ISNULL(@MALOP, MALOP)
     WHERE MASV = @MASV;
-    
-    IF @@ROWCOUNT = 0
-        RAISERROR('Cập nhật thông tin sinh viên thất bại.', 16, 1);
 END;
 GO
 
@@ -598,4 +584,3 @@ BEGIN
     IF @@ROWCOUNT = 0
         RAISERROR('Cập nhật điểm thất bại.', 16, 1);
 END;
-

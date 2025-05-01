@@ -58,7 +58,7 @@ public class StudentController {
         return ResponseEntity.ok(
             new ApiResponse<>(
                 "success", 
-                "Students retrieved successfully", 
+                "Students updated successfully", 
                 updatedStudent
             )
         );
