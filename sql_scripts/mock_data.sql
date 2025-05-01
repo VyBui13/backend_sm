@@ -192,345 +192,297 @@ EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN
     @MASV = 'SV001', 
     @MAHP = 'HP001', 
     @DIEMTHI = 8.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV001', 
     @MAHP = 'HP002', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV001', 
     @MAHP = 'HP004', 
     @DIEMTHI = 9.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV001', 
     @MAHP = 'HP005', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV002 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV002', 
     @MAHP = 'HP001', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV002', 
     @MAHP = 'HP003', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV002', 
     @MAHP = 'HP004', 
     @DIEMTHI = 6.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV002', 
     @MAHP = 'HP006', 
     @DIEMTHI = 9.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV003 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV003', 
     @MAHP = 'HP002', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV003', 
     @MAHP = 'HP003', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV003', 
     @MAHP = 'HP005', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV003', 
     @MAHP = 'HP007', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV004 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV004', 
     @MAHP = 'HP001', 
     @DIEMTHI = 9.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV004', 
     @MAHP = 'HP004', 
     @DIEMTHI = 8.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV004', 
     @MAHP = 'HP006', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV004', 
     @MAHP = 'HP008', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV005 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV005', 
     @MAHP = 'HP002', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV005', 
     @MAHP = 'HP005', 
     @DIEMTHI = 6.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV005', 
     @MAHP = 'HP007', 
     @DIEMTHI = 8.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV005', 
     @MAHP = 'HP008', 
     @DIEMTHI = 9.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV006 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV006', 
     @MAHP = 'HP001', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV006', 
     @MAHP = 'HP003', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV006', 
     @MAHP = 'HP004', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV006', 
     @MAHP = 'HP006', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV007 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV007', 
     @MAHP = 'HP002', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV007', 
     @MAHP = 'HP005', 
     @DIEMTHI = 9.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV007', 
     @MAHP = 'HP007', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV007', 
     @MAHP = 'HP008', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV001', 
-    @PUBKEY = 'NV001';
+    @MANV = 'NV001'
 
 -- Sinh viên SV008 (Lớp LOP002, NV002)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV008', 
     @MAHP = 'HP001', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV008', 
     @MAHP = 'HP003', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV008', 
     @MAHP = 'HP005', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV008', 
     @MAHP = 'HP007', 
     @DIEMTHI = 9.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 -- Sinh viên SV009 (Lớp LOP002, NV002)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV009', 
     @MAHP = 'HP002', 
     @DIEMTHI = 8.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV009', 
     @MAHP = 'HP004', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV009', 
     @MAHP = 'HP006', 
     @DIEMTHI = 6.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV009', 
     @MAHP = 'HP008', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 -- Sinh viên SV010 (Lớp LOP002, NV002)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV010', 
     @MAHP = 'HP001', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV010', 
     @MAHP = 'HP003', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV010', 
     @MAHP = 'HP005', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV010', 
     @MAHP = 'HP007', 
     @DIEMTHI = 9.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 -- Sinh viên SV011 (Lớp LOP002, NV002)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV011', 
     @MAHP = 'HP002', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV011', 
     @MAHP = 'HP004', 
     @DIEMTHI = 8.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV011', 
     @MAHP = 'HP006', 
     @DIEMTHI = 6.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV011', 
     @MAHP = 'HP008', 
     @DIEMTHI = 7.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 -- Sinh viên SV012 (Lớp LOP002, NV002)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV012', 
     @MAHP = 'HP001', 
     @DIEMTHI = 8.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV012', 
     @MAHP = 'HP003', 
     @DIEMTHI = 9.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV012', 
     @MAHP = 'HP005', 
     @DIEMTHI = 6.0, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
 
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
     @MASV = 'SV012', 
     @MAHP = 'HP007', 
     @DIEMTHI = 7.5, 
-    @MANV = 'NV002', 
-    @PUBKEY = 'NV002';
+    @MANV = 'NV002'
