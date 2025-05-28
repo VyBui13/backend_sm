@@ -12,11 +12,11 @@ public class Staff {
 
     private String fullname;
     private String email;
-    private Long salary;
+    private byte[] salary;
     private String username;
     private byte[] password;
     private String pubkey;
-    
+
     public String getId() {
         return id;
     }
@@ -41,11 +41,11 @@ public class Staff {
         this.email = email;
     }
 
-    public Long getSalary() {
+    public byte[] getSalary() {
         return salary;
     }
 
-    public void setSalary(Long salary) {
+    public void setSalary(byte[] salary) {
         this.salary = salary;
     }
 

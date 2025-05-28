@@ -4,11 +4,21 @@ public class StaffDto {
     private String id;
 
     private String fullname;
-    
+
     private String email;
-    
+
     private Long salary;
-    
+
+    public StaffDto() {
+    }
+
+    public StaffDto(String id, String fullname, Long salary, String email) {
+        this.id = id;
+        this.fullname = fullname;
+        this.salary = salary;
+        this.email = email;
+    }
+
     public String getId() {
         return id;
     }

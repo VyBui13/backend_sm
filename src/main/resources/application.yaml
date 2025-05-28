@@ -1,13 +1,16 @@
 server:
   port: 8080
-
-spring:
+app:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=QLSVNhom;encrypt=true;trustServerCertificate=true;characterEncoding=UTF-8
-    username: sa
-    password: abcd
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-
+    sqlserver:
+      jdbc-url: jdbc:sqlserver://localhost:1433;databaseName=QLSVNhom;encrypt=true;trustServerCertificate=true;characterEncoding=UTF-8
+      username: sa
+      password: abcd
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    sqlite:
+      jdbc-url: jdbc:sqlite:src/main/resources/key.db
+      driver-class-name: org.sqlite.JDBC
+spring:
   jpa:
     hibernate:
       ddl-auto: none

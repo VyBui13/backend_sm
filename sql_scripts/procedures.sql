@@ -20,7 +20,7 @@ BEGIN
     DECLARE @ASYMKEY_NAME NVARCHAR(100);
 
     -- Tạo giá trị mật khẩu được HASH bằng SHA1
-    SET @HASHED_MK = HASHBYTES('SHA1', CONVERT(VARBINARY(MAX), @MK));
+    SET @HASHED_MK = HASHBYTES('SHA1', @MK);
 
     -- Tên khóa bất đối xứng (asymmetric key) là mã nhân viên
     SET @ASYMKEY_NAME = @MANV;
@@ -116,3 +116,8 @@ EXEC SP_SIGN_IN_NHANVIEN 'nv_an', 'password13'
 --EXEC SP_SEL_PUBLIC_NHANVIEN 'NVA', 'abcd12'
 
 --exec sp_executesql N'EXEC SP_SEL_PUBLIC_NHANVIEN  @P0 ,  @P1 ',N'@P0 nvarchar(100),@P1 nvarchar(100)',N'NV01',N'abcd12'
+
+-- NO ENCRYPT VERSION
+
+GO
+

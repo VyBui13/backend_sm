@@ -4,7 +4,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -18,11 +18,13 @@ import com.studentmanagement.student.repository.StudentRepository;
 
 import jakarta.annotation.PostConstruct;
 
-
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate sqlServerJdbcTemplate;
+
+    public StudentRepositoryImpl(@Qualifier("sqlServerJdbcTemplate") JdbcTemplate sqlServerJdbcTemplate) {
+        this.sqlServerJdbcTemplate = sqlServerJdbcTemplate;
+    }
 
     private SimpleJdbcCall getAllStudents;
     private SimpleJdbcCall getAllStudentsByStaffId;
@@ -30,27 +32,25 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @PostConstruct
     public void init() {
-        getAllStudents = new SimpleJdbcCall(jdbcTemplate)
+        getAllStudents = new SimpleJdbcCall(sqlServerJdbcTemplate)
                 .withProcedureName("SP_SEL_ALL_PUBLIC_SINHVIEN")
                 .returningResultSet("result", new StudentRowMapper());
 
-        getAllStudentsByStaffId = new SimpleJdbcCall(jdbcTemplate)
+        getAllStudentsByStaffId = new SimpleJdbcCall(sqlServerJdbcTemplate)
                 .withProcedureName("SP_SEL_PUBLIC_SINHVIEN_BY_NHANVIEN")
                 .declareParameters(
-                    new SqlParameter("MANV", Types.VARCHAR)
-                )
+                        new SqlParameter("MANV", Types.VARCHAR))
                 .returningResultSet("result", new StudentRowMapper());
 
-        updateStudent = new SimpleJdbcCall(jdbcTemplate)
+        updateStudent = new SimpleJdbcCall(sqlServerJdbcTemplate)
                 .withProcedureName("SP_UPDATE_SINHVIEN")
                 .declareParameters(
-                    new SqlParameter("MASV", Types.VARCHAR),
-                    new SqlParameter("HOTEN", Types.NVARCHAR),
-                    new SqlParameter("NGAYSINH", Types.TIMESTAMP), // !
-                    new SqlParameter("DIACHI", Types.NVARCHAR),
-                    new SqlParameter("MANV", Types.VARCHAR),
-                    new SqlParameter("MK", Types.NVARCHAR)
-                )
+                        new SqlParameter("MASV", Types.VARCHAR),
+                        new SqlParameter("HOTEN", Types.NVARCHAR),
+                        new SqlParameter("NGAYSINH", Types.TIMESTAMP), // !
+                        new SqlParameter("DIACHI", Types.NVARCHAR),
+                        new SqlParameter("MANV", Types.VARCHAR),
+                        new SqlParameter("MK", Types.NVARCHAR))
                 .returningResultSet("result", new StudentRowMapper());
     }
 
@@ -61,8 +61,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 
         if (resultObj instanceof List<?> resultList && !resultList.isEmpty()) {
             List<Student> students = resultList.stream()
-                    .filter(Student.class::isInstance)   
-                    .map(Student.class::cast)            
+                    .filter(Student.class::isInstance)
+                    .map(Student.class::cast)
                     .toList();
 
             return students;
@@ -74,16 +74,15 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public List<Student> getAllStudents(String staffId) {
         Map<String, Object> inParams = Map.of(
-            "MANV", staffId
-        );
+                "MANV", staffId);
 
         Map<String, Object> out = getAllStudentsByStaffId.execute(inParams);
         Object resultObj = out.get("result");
 
         if (resultObj instanceof List<?> resultList && !resultList.isEmpty()) {
             List<Student> students = resultList.stream()
-                    .filter(Student.class::isInstance)   
-                    .map(Student.class::cast)            
+                    .filter(Student.class::isInstance)
+                    .map(Student.class::cast)
                     .toList();
 
             return students;
@@ -95,21 +94,21 @@ public class StudentRepositoryImpl implements StudentRepository {
     @Override
     public Student updateStudent(String id, UpdateStudentDto updateStudentDto) {
         MapSqlParameterSource inParams = new MapSqlParameterSource()
-                    .addValue("MASV", id)
-                    .addValue("HOTEN", updateStudentDto.getFullname())
-                    .addValue("NGAYSINH", updateStudentDto.getDob(), Types.TIMESTAMP) // Có thể null
-                    .addValue("DIACHI", updateStudentDto.getAddress(), Types.NVARCHAR) // Có thể null
-                    .addValue("MANV", updateStudentDto.getStaffId())
-                    .addValue("MK", updateStudentDto.getPassword());
+                .addValue("MASV", id)
+                .addValue("HOTEN", updateStudentDto.getFullname())
+                .addValue("NGAYSINH", updateStudentDto.getDob(), Types.TIMESTAMP) // Có thể null
+                .addValue("DIACHI", updateStudentDto.getAddress(), Types.NVARCHAR) // Có thể null
+                .addValue("MANV", updateStudentDto.getStaffId())
+                .addValue("MK", updateStudentDto.getPassword());
 
         Map<String, Object> out = updateStudent.execute(inParams);
 
         Object resultObj = out.get("result");
 
-        if (resultObj instanceof List<?> resultList 
-            && !resultList.isEmpty() 
-            && resultList.get(0) instanceof Student student) {
-            
+        if (resultObj instanceof List<?> resultList
+                && !resultList.isEmpty()
+                && resultList.get(0) instanceof Student student) {
+
             return student;
         }
 

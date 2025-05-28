@@ -16,7 +16,7 @@ public class StaffRowMapper implements RowMapper<Staff> {
         staff.setId(rs.getString("MANV"));
         staff.setFullname(rs.getString("HOTEN"));
         staff.setEmail(rs.getString("EMAIL"));
-        staff.setSalary(rs.getLong("LUONGCB"));
+        staff.setSalary(rs.getBytes("LUONG"));
 
         return staff;
     }
