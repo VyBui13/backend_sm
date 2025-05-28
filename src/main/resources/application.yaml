@@ -19,8 +19,3 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
-
-  cloud:
-    config:
-      import-check:
-        enabled: false
