@@ -18,49 +18,40 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping("/students")
 public class StudentController {
-    @Autowired
-    private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<Student>>> getAllStudents(
-        @RequestParam(required = false, name = "staffId") String staffId
-    ) {
-        if (staffId != null) {
-            return ResponseEntity.ok(
-                new ApiResponse<>(
-                    "success", 
-                    "Students with staffId retrieved successfully", 
-                    studentService.getAllStudents(staffId)
-                )
-            );
-        }
+	@GetMapping
+	public ResponseEntity<ApiResponse<List<Student>>> getAllStudents(
+			@RequestParam(required = false, name = "staffId") String staffId) {
+		if (staffId != null) {
+			return ResponseEntity.ok(
+					new ApiResponse<>(
+							"success",
+							"Students with staffId retrieved successfully",
+							studentService.getAllStudents(staffId)));
+		}
 
-        return ResponseEntity.ok(
-            new ApiResponse<>(
-                "success", 
-                "Students retrieved successfully", 
-                studentService.getAllStudents()
-            )
-        ); 
-    }
-    
-    @PatchMapping("/{id}")
-    public ResponseEntity<ApiResponse<Student>> updateStudent(
-        @PathVariable String id,
-        @RequestBody UpdateStudentDto updateStudentDto
-    ) {
-        Student updatedStudent = studentService.updateStudent(id, updateStudentDto);
+		return ResponseEntity.ok(
+				new ApiResponse<>(
+						"success",
+						"Students retrieved successfully",
+						studentService.getAllStudents()));
+	}
 
-        return ResponseEntity.ok(
-            new ApiResponse<>(
-                "success", 
-                "Students updated successfully", 
-                updatedStudent
-            )
-        );
-    }
+	@PatchMapping("/{id}")
+	public ResponseEntity<ApiResponse<Student>> updateStudent(
+			@PathVariable String id,
+			@RequestBody UpdateStudentDto updateStudentDto) {
+		Student updatedStudent = studentService.updateStudent(id, updateStudentDto);
+
+		return ResponseEntity.ok(
+				new ApiResponse<>(
+						"success",
+						"Students updated successfully",
+						updatedStudent));
+	}
 }

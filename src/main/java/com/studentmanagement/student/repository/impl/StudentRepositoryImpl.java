@@ -1,5 +1,7 @@
 package com.studentmanagement.student.repository.impl;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 import java.util.Map;
@@ -20,98 +22,124 @@ import jakarta.annotation.PostConstruct;
 
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {
-    private JdbcTemplate sqlServerJdbcTemplate;
+	private JdbcTemplate sqlServerJdbcTemplate;
 
-    public StudentRepositoryImpl(@Qualifier("sqlServerJdbcTemplate") JdbcTemplate sqlServerJdbcTemplate) {
-        this.sqlServerJdbcTemplate = sqlServerJdbcTemplate;
-    }
+	public StudentRepositoryImpl(@Qualifier("sqlServerJdbcTemplate") JdbcTemplate sqlServerJdbcTemplate) {
+		this.sqlServerJdbcTemplate = sqlServerJdbcTemplate;
+	}
 
-    private SimpleJdbcCall getAllStudents;
-    private SimpleJdbcCall getAllStudentsByStaffId;
-    private SimpleJdbcCall updateStudent;
+	private SimpleJdbcCall getAllStudents;
+	private SimpleJdbcCall getAllStudentsByStaffId;
+	private SimpleJdbcCall updateStudent;
+	private SimpleJdbcCall createStudent;
 
-    @PostConstruct
-    public void init() {
-        getAllStudents = new SimpleJdbcCall(sqlServerJdbcTemplate)
-                .withProcedureName("SP_SEL_ALL_PUBLIC_SINHVIEN")
-                .returningResultSet("result", new StudentRowMapper());
+	@PostConstruct
+	public void init() {
+		getAllStudents = new SimpleJdbcCall(sqlServerJdbcTemplate)
+				.withProcedureName("SP_SEL_ALL_PUBLIC_SINHVIEN")
+				.returningResultSet("result", new StudentRowMapper());
 
-        getAllStudentsByStaffId = new SimpleJdbcCall(sqlServerJdbcTemplate)
-                .withProcedureName("SP_SEL_PUBLIC_SINHVIEN_BY_NHANVIEN")
-                .declareParameters(
-                        new SqlParameter("MANV", Types.VARCHAR))
-                .returningResultSet("result", new StudentRowMapper());
+		getAllStudentsByStaffId = new SimpleJdbcCall(sqlServerJdbcTemplate)
+				.withProcedureName("SP_SEL_PUBLIC_SINHVIEN_BY_NHANVIEN")
+				.declareParameters(
+						new SqlParameter("MANV", Types.VARCHAR))
+				.returningResultSet("result", new StudentRowMapper());
 
-        updateStudent = new SimpleJdbcCall(sqlServerJdbcTemplate)
-                .withProcedureName("SP_UPDATE_SINHVIEN")
-                .declareParameters(
-                        new SqlParameter("MASV", Types.VARCHAR),
-                        new SqlParameter("HOTEN", Types.NVARCHAR),
-                        new SqlParameter("NGAYSINH", Types.TIMESTAMP), // !
-                        new SqlParameter("DIACHI", Types.NVARCHAR),
-                        new SqlParameter("MANV", Types.VARCHAR),
-                        new SqlParameter("MK", Types.NVARCHAR))
-                .returningResultSet("result", new StudentRowMapper());
-    }
+		updateStudent = new SimpleJdbcCall(sqlServerJdbcTemplate)
+				.withProcedureName("SP_UPDATE_SINHVIEN")
+				.declareParameters(
+						new SqlParameter("MASV", Types.VARCHAR),
+						new SqlParameter("HOTEN", Types.NVARCHAR),
+						new SqlParameter("NGAYSINH", Types.TIMESTAMP),
+						new SqlParameter("DIACHI", Types.NVARCHAR))
+				.returningResultSet("result", new StudentRowMapper());
 
-    @Override
-    public List<Student> getAllStudents() {
-        Map<String, Object> out = getAllStudents.execute();
-        Object resultObj = out.get("result");
+		createStudent = new SimpleJdbcCall(sqlServerJdbcTemplate)
+				.withProcedureName("SP_INS_PUBLIC_ENCRYPT_SINHVIEN")
+				.declareParameters(
+						new SqlParameter("MASV", Types.VARCHAR),
+						new SqlParameter("HOTEN", Types.NVARCHAR),
+						new SqlParameter("NGAYSINH", Types.TIMESTAMP), // !
+						new SqlParameter("DIACHI", Types.NVARCHAR),
+						new SqlParameter("MALOP", Types.VARCHAR),
+						new SqlParameter("TENDN", Types.VARCHAR),
+						new SqlParameter("MK", Types.VARBINARY));
 
-        if (resultObj instanceof List<?> resultList && !resultList.isEmpty()) {
-            List<Student> students = resultList.stream()
-                    .filter(Student.class::isInstance)
-                    .map(Student.class::cast)
-                    .toList();
+	}
 
-            return students;
-        }
+	@Override
+	public List<Student> getAllStudents() {
+		Map<String, Object> out = getAllStudents.execute();
+		Object resultObj = out.get("result");
 
-        return List.of();
-    }
+		if (resultObj instanceof List<?> resultList && !resultList.isEmpty()) {
+			List<Student> students = resultList.stream()
+					.filter(Student.class::isInstance)
+					.map(Student.class::cast)
+					.toList();
 
-    @Override
-    public List<Student> getAllStudents(String staffId) {
-        Map<String, Object> inParams = Map.of(
-                "MANV", staffId);
+			return students;
+		}
 
-        Map<String, Object> out = getAllStudentsByStaffId.execute(inParams);
-        Object resultObj = out.get("result");
+		return List.of();
+	}
 
-        if (resultObj instanceof List<?> resultList && !resultList.isEmpty()) {
-            List<Student> students = resultList.stream()
-                    .filter(Student.class::isInstance)
-                    .map(Student.class::cast)
-                    .toList();
+	@Override
+	public List<Student> getAllStudents(String staffId) {
+		Map<String, Object> inParams = Map.of(
+				"MANV", staffId);
 
-            return students;
-        }
+		Map<String, Object> out = getAllStudentsByStaffId.execute(inParams);
+		Object resultObj = out.get("result");
 
-        return List.of();
-    }
+		if (resultObj instanceof List<?> resultList && !resultList.isEmpty()) {
+			List<Student> students = resultList.stream()
+					.filter(Student.class::isInstance)
+					.map(Student.class::cast)
+					.toList();
 
-    @Override
-    public Student updateStudent(String id, UpdateStudentDto updateStudentDto) {
-        MapSqlParameterSource inParams = new MapSqlParameterSource()
-                .addValue("MASV", id)
-                .addValue("HOTEN", updateStudentDto.getFullname())
-                .addValue("NGAYSINH", updateStudentDto.getDob(), Types.TIMESTAMP) // Có thể null
-                .addValue("DIACHI", updateStudentDto.getAddress(), Types.NVARCHAR) // Có thể null
-                .addValue("MANV", updateStudentDto.getStaffId())
-                .addValue("MK", updateStudentDto.getPassword());
+			return students;
+		}
 
-        Map<String, Object> out = updateStudent.execute(inParams);
+		return List.of();
+	}
 
-        Object resultObj = out.get("result");
+	@Override
+	public Student updateStudent(String id, UpdateStudentDto updateStudentDto) {
+		MapSqlParameterSource inParams = new MapSqlParameterSource()
+				.addValue("MASV", id)
+				.addValue("HOTEN", updateStudentDto.getFullname())
+				.addValue("NGAYSINH", updateStudentDto.getDob(), Types.TIMESTAMP) // Có thể null
+				.addValue("DIACHI", updateStudentDto.getAddress(), Types.NVARCHAR) // Có thể null
+				.addValue("MANV", updateStudentDto.getStaffId())
+				.addValue("MK", updateStudentDto.getPassword());
 
-        if (resultObj instanceof List<?> resultList
-                && !resultList.isEmpty()
-                && resultList.get(0) instanceof Student student) {
+		Map<String, Object> out = updateStudent.execute(inParams);
 
-            return student;
-        }
+		Object resultObj = out.get("result");
 
-        return null;
-    }
+		if (resultObj instanceof List<?> resultList
+				&& !resultList.isEmpty()
+				&& resultList.get(0) instanceof Student student) {
+
+			return student;
+		}
+
+		return null;
+	}
+
+	@Override
+	public void createStudent(String id, String fullname, Timestamp dob, String address, String classId,
+			String username, byte[] password) {
+		Map<String, Object> inParams = Map.of(
+				"MASV", id,
+				"HOTEN", fullname,
+				"NGAYSINH", dob,
+				"DIACHI", address,
+				"MALOP", classId,
+				"TENDN", username,
+				"MK", password);
+
+		createStudent.execute(inParams);
+	}
 }

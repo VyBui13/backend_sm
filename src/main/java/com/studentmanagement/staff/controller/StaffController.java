@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.studentmanagement.common.response.ApiResponse;
-import com.studentmanagement.staff.dto.CreateStaffDto;
 import com.studentmanagement.staff.dto.StaffDto;
 import com.studentmanagement.staff.dto.StaffSignInDto;
 import com.studentmanagement.staff.service.StaffService;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -63,17 +61,6 @@ public class StaffController {
 				staffSignInDto.getPassword());
 
 		return ResponseEntity.ok(new ApiResponse<>("success", "Signed in successfully", foundStaff));
-	}
-
-	@GetMapping("/test")
-	public ResponseEntity<ApiResponse<String>> testEndpoint() {
-
-		staffService.createStaff(new CreateStaffDto());
-
-		return ResponseEntity.ok(new ApiResponse<>(
-				"success",
-				"Test endpoint is working",
-				"Test successful"));
 	}
 
 	// @GetMapping("/{id}")

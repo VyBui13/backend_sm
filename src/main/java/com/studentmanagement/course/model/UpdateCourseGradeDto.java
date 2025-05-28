@@ -2,32 +2,22 @@ package com.studentmanagement.course.model;
 
 import java.util.Map;
 
+import lombok.Data;
+
+@Data
 public class UpdateCourseGradeDto {
     private Map<String, Float> updateCourseGradeData;
     private String password;
     private String staffId;
 
-    public String getStaffId() {
-        return staffId;
+    public UpdateCourseGradeDto() {
+        // Default constructor
     }
 
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Map<String, Float> getUpdateCourseGradeData() {
-        return updateCourseGradeData;
-    }
-    
-    public void setUpdateCourseGradeData(Map<String, Float> updateCourseGradeData) {
+    public UpdateCourseGradeDto(Map<String, Float> updateCourseGradeData, String username, String password,
+            String staffId) {
         this.updateCourseGradeData = updateCourseGradeData;
+        this.password = password;
+        this.staffId = staffId;
     }
 }

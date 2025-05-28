@@ -2,21 +2,21 @@ USE QLSVNhom
 GO
 
 -- Thêm 2 nhân viên
-EXEC SP_INS_PUBLIC_NHANVIEN 
-    @MANV = 'NV001', 
-    @HOTEN = N'Nguyễn Văn An', 
-    @EMAIL = 'an@school.com', 
-    @LUONGCB = 5000000, 
-    @TENDN = 'nv_an', 
-    @MK = 'password123';
+-- EXEC SP_INS_PUBLIC_NHANVIEN 
+--     @MANV = 'NV001', 
+--     @HOTEN = N'Nguyễn Văn An', 
+--     @EMAIL = 'an@school.com', 
+--     @LUONGCB = 5000000, 
+--     @TENDN = 'nv_an', 
+--     @MK = 'password123';
 
-EXEC SP_INS_PUBLIC_NHANVIEN 
-    @MANV = 'NV002', 
-    @HOTEN = N'Trần Thị Bình', 
-    @EMAIL = 'binh@school.com', 
-    @LUONGCB = 5500000, 
-    @TENDN = 'nv_binh', 
-    @MK = 'password456';
+-- EXEC SP_INS_PUBLIC_NHANVIEN 
+--     @MANV = 'NV002', 
+--     @HOTEN = N'Trần Thị Bình', 
+--     @EMAIL = 'binh@school.com', 
+--     @LUONGCB = 5500000, 
+--     @TENDN = 'nv_binh', 
+--     @MK = 'password456';
 
 -- Thêm 2 lớp
 EXEC SP_INS_LOP 
@@ -30,117 +30,114 @@ EXEC SP_INS_LOP
     @MANV = 'NV002';
 
 
-
-
-
 -- Thêm 12 sinh viên (7 sinh viên lớp LOP001, 5 sinh viên lớp LOP002)
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV001', 
-    @HOTEN = N'Nguyễn Văn Hùng', 
-    @NGAYSINH = '2003-01-15', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_hung', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV001', 
+--     @HOTEN = N'Nguyễn Văn Hùng', 
+--     @NGAYSINH = '2003-01-15', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_hung', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV002', 
-    @HOTEN = N'Trần Thị Mai', 
-    @NGAYSINH = '2003-02-20', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_mai', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV002', 
+--     @HOTEN = N'Trần Thị Mai', 
+--     @NGAYSINH = '2003-02-20', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_mai', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV003', 
-    @HOTEN = N'Lê Văn Nam', 
-    @NGAYSINH = '2003-03-10', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_nam', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV003', 
+--     @HOTEN = N'Lê Văn Nam', 
+--     @NGAYSINH = '2003-03-10', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_nam', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV004', 
-    @HOTEN = N'Phạm Thị Lan', 
-    @NGAYSINH = '2003-04-05', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_lan', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV004', 
+--     @HOTEN = N'Phạm Thị Lan', 
+--     @NGAYSINH = '2003-04-05', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_lan', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV005', 
-    @HOTEN = N'Hoàng Văn Tùng', 
-    @NGAYSINH = '2003-05-12', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_tung', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV005', 
+--     @HOTEN = N'Hoàng Văn Tùng', 
+--     @NGAYSINH = '2003-05-12', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_tung', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV006', 
-    @HOTEN = N'Ngô Thị Hà', 
-    @NGAYSINH = '2003-06-18', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_ha', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV006', 
+--     @HOTEN = N'Ngô Thị Hà', 
+--     @NGAYSINH = '2003-06-18', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_ha', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV007', 
-    @HOTEN = N'Vũ Văn Long', 
-    @NGAYSINH = '2003-07-22', 
-    @DIACHI = N'Hà Nội', 
-    @MALOP = 'LOP001', 
-    @TENDN = 'sv_long', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV007', 
+--     @HOTEN = N'Vũ Văn Long', 
+--     @NGAYSINH = '2003-07-22', 
+--     @DIACHI = N'Hà Nội', 
+--     @MALOP = 'LOP001', 
+--     @TENDN = 'sv_long', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV008', 
-    @HOTEN = N'Đỗ Thị Thảo', 
-    @NGAYSINH = '2003-08-30', 
-    @DIACHI = N'TP.HCM', 
-    @MALOP = 'LOP002', 
-    @TENDN = 'sv_thao', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV008', 
+--     @HOTEN = N'Đỗ Thị Thảo', 
+--     @NGAYSINH = '2003-08-30', 
+--     @DIACHI = N'TP.HCM', 
+--     @MALOP = 'LOP002', 
+--     @TENDN = 'sv_thao', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV009', 
-    @HOTEN = N'Bùi Văn Khoa', 
-    @NGAYSINH = '2003-09-14', 
-    @DIACHI = N'TP.HCM', 
-    @MALOP = 'LOP002', 
-    @TENDN = 'sv_khoa', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV009', 
+--     @HOTEN = N'Bùi Văn Khoa', 
+--     @NGAYSINH = '2003-09-14', 
+--     @DIACHI = N'TP.HCM', 
+--     @MALOP = 'LOP002', 
+--     @TENDN = 'sv_khoa', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV010', 
-    @HOTEN = N'Nguyễn Thị Linh', 
-    @NGAYSINH = '2003-10-25', 
-    @DIACHI = N'TP.HCM', 
-    @MALOP = 'LOP002', 
-    @TENDN = 'sv_linh', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV010', 
+--     @HOTEN = N'Nguyễn Thị Linh', 
+--     @NGAYSINH = '2003-10-25', 
+--     @DIACHI = N'TP.HCM', 
+--     @MALOP = 'LOP002', 
+--     @TENDN = 'sv_linh', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV011', 
-    @HOTEN = N'Trần Văn Dũng', 
-    @NGAYSINH = '2003-11-03', 
-    @DIACHI = N'TP.HCM', 
-    @MALOP = 'LOP002', 
-    @TENDN = 'sv_dung', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV011', 
+--     @HOTEN = N'Trần Văn Dũng', 
+--     @NGAYSINH = '2003-11-03', 
+--     @DIACHI = N'TP.HCM', 
+--     @MALOP = 'LOP002', 
+--     @TENDN = 'sv_dung', 
+--     @MK = 'sv123';
 
-EXEC SP_INS_PUBLIC_SINHVIEN 
-    @MASV = 'SV012', 
-    @HOTEN = N'Lê Thị Hương', 
-    @NGAYSINH = '2003-12-12', 
-    @DIACHI = N'TP.HCM', 
-    @MALOP = 'LOP002', 
-    @TENDN = 'sv_huong', 
-    @MK = 'sv123';
+-- EXEC SP_INS_PUBLIC_SINHVIEN 
+--     @MASV = 'SV012', 
+--     @HOTEN = N'Lê Thị Hương', 
+--     @NGAYSINH = '2003-12-12', 
+--     @DIACHI = N'TP.HCM', 
+--     @MALOP = 'LOP002', 
+--     @TENDN = 'sv_huong', 
+--     @MK = 'sv123';
 
 -- Thêm 8 học phần
 EXEC SP_INS_HOCPHAN 
@@ -184,8 +181,7 @@ EXEC SP_INS_HOCPHAN
     @SOTC = 1;
 
 
-
-
+/*
 -- Thêm điểm cho sinh viên (mỗi sinh viên học 4 học phần ngẫu nhiên)
 -- Sinh viên SV001 (Lớp LOP001, NV001)
 EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN 
@@ -486,3 +482,5 @@ EXEC SP_INS_DIEM_BY_SINHVIEN_AND_HOCPHAN
     @MAHP = 'HP007', 
     @DIEMTHI = 7.5, 
     @MANV = 'NV002'
+
+*/

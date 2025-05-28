@@ -6,4 +6,6 @@ import com.studentmanagement.lop.model.LopDto;
 
 public interface LopRepository {
     public List<LopDto> getLopWithStaff();
+
+    public void createLop(String id, String name, String staffId);
 }

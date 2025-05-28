@@ -1,7 +1,8 @@
-﻿--use master
---go 
---drop database qlsvnhom
-
+﻿/*
+	use master
+	go 
+	drop database qlsvnhom
+*/
 USE MASTER
 GO
 CREATE DATABASE QLSVNhom

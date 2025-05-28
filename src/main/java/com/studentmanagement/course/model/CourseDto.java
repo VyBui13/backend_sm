@@ -1,40 +1,21 @@
 package com.studentmanagement.course.model;
 
+import lombok.Data;
+
+@Data
 public class CourseDto {
     private String courseId;
     private String courseName;
     private Integer credits;
     private Float grade;
 
-    public Integer getCredits() {
-        return credits;
+    public CourseDto() {
     }
 
-    public void setCredits(Integer credits) {
-        this.credits = credits;
-    }
-    
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(String courseId) {
+    public CourseDto(String courseId, String courseName, Integer credits, Float grade) {
         this.courseId = courseId;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-    
-    public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
-
-    public Float getGrade() {
-        return grade;
-    }
-    
-    public void setGrade(Float grade) {
+        this.credits = credits;
         this.grade = grade;
     }
 }

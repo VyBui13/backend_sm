@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
-import com.studentmanagement.staff.dto.CreateStaffDto;
 import com.studentmanagement.staff.mapper.SignInRowMapper;
 import com.studentmanagement.staff.mapper.StaffRowMapper;
 import com.studentmanagement.staff.model.Staff;

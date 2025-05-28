@@ -21,86 +21,71 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
-    @Autowired
-    private CourseService courseService;
+	@Autowired
+	private CourseService courseService;
 
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<CourseDto>>> getCourseByStudentId(
-        @RequestParam(required = true, name = "studentId") String studentId,
-        @RequestParam(required = true, name = "password") String password
-    ) {
-        try {
-            List<CourseDto> courses = courseService.getCourseByStudentId(studentId, password);
-            
-            return ResponseEntity.ok(
-                new ApiResponse<List<CourseDto>>(
-                    "success",
-                    "Courses retrieved successfully",
-                    courses
-                )
-            );
-        } catch (Exception e) {
-            if (e.getCause() instanceof SQLServerException) {
+	@GetMapping
+	public ResponseEntity<ApiResponse<List<CourseDto>>> getCourseByStudentId(
+			@RequestParam(required = true, name = "studentId") String studentId,
+			@RequestParam(required = true, name = "staffId") String staffId,
+			@RequestParam(required = true, name = "password") String password) {
+		try {
+			List<CourseDto> courses = courseService.getCourseByStudentId(studentId, staffId, password);
 
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                    new ApiResponse<List<CourseDto>>(
-                        "failed",
-                        "Unmatched credentials",
-                        null
-                    )
-                );
-            }
+			return ResponseEntity.ok(
+					new ApiResponse<List<CourseDto>>(
+							"success",
+							"Courses retrieved successfully",
+							courses));
+		} catch (Exception e) {
+			if (e.getCause() instanceof SQLServerException) {
 
-            return ResponseEntity.internalServerError().body(
-                new ApiResponse<List<CourseDto>>(
-                    "failed",
-                    "Internal server error",
-                    null
-                )
-            );
-        }
-    }
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+						new ApiResponse<List<CourseDto>>(
+								"failed",
+								"Unmatched credentials",
+								null));
+			}
 
-    @PatchMapping()
-    public ResponseEntity<ApiResponse<List<CourseDto>>> updateCourseGrades(
-        @RequestParam(
-            required = true,
-            name = "studentId"
-        ) String studentId,
-        @RequestBody UpdateCourseGradeDto updateCourseGradeDto
-    ) {
-        try {
-            List<CourseDto> courses = courseService.updateCourseGradeByStudentId(studentId, updateCourseGradeDto);
-            
-            return ResponseEntity.ok(
-                new ApiResponse<List<CourseDto>>(
-                    "success",
-                    "Courses grade updated successfully",
-                    courses
-                )
-            );
-        } catch(Exception e) {
-            if (e.getCause() instanceof SQLServerException) {
-                SQLServerException sqlEx = (SQLServerException) e.getCause();
-                // Lấy thông tin lỗi từ RAISERROR
-                String errorMessage = sqlEx.getMessage();
+			return ResponseEntity.internalServerError().body(
+					new ApiResponse<List<CourseDto>>(
+							"failed",
+							e.getMessage(),
+							null));
+		}
+	}
 
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                    new ApiResponse<List<CourseDto>>(
-                        "failed",
-                        errorMessage,
-                        null
-                    )
-                );
-            }
+	@PatchMapping()
+	public ResponseEntity<ApiResponse<List<CourseDto>>> updateCourseGrades(
+			@RequestParam(required = true, name = "studentId") String studentId,
+			@RequestBody UpdateCourseGradeDto updateCourseGradeDto) {
+		try {
+			List<CourseDto> courses = courseService.updateCourseGradeByStudentId(studentId,
+					updateCourseGradeDto);
 
-            return ResponseEntity.internalServerError().body(
-                new ApiResponse<List<CourseDto>>(
-                    "failed",
-                    "Internal server error",
-                    null
-                )
-            );
-        }
-    }
+			return ResponseEntity.ok(
+					new ApiResponse<List<CourseDto>>(
+							"success",
+							"Courses grade updated successfully",
+							courses));
+		} catch (Exception e) {
+			if (e.getCause() instanceof SQLServerException) {
+				SQLServerException sqlEx = (SQLServerException) e.getCause();
+				// Lấy thông tin lỗi từ RAISERROR
+				String errorMessage = sqlEx.getMessage();
+
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+						new ApiResponse<List<CourseDto>>(
+								"failed",
+								errorMessage,
+								null));
+			}
+
+			return ResponseEntity.internalServerError().body(
+					new ApiResponse<List<CourseDto>>(
+							"failed",
+							e.getMessage(),
+							null));
+		}
+	}
 }
